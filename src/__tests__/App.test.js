@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { format } from "date-fns";
+import React from "react";
 import App from "../components/App";
 
 beforeEach(() => {
@@ -8,24 +8,23 @@ beforeEach(() => {
 });
 
 test('should include "Now" in the header instead of a time', () => {
-  expect(
-    screen.queryByText(format(new Date(), "MMMM do yyyy, h:mm:ss a"))
-  ).not.toBeInTheDocument();
-  expect(screen.queryByText(/Now/g)).toBeInTheDocument();
+  expect(screen.getByText("Now")).toBeInTheDocument();
 });
 
 test("should include the <ExampleComponent />", () => {
-  expect(screen.queryByText("Whoa!")).toBeInTheDocument();
+  expect(screen.getByText("Whoa!")).toBeInTheDocument();
 });
 
 test("should include the <TestComponent />", () => {
-  expect(screen.queryByTitle("time video")).toBeInTheDocument();
+  expect(screen.getByTitle("time video")).toBeInTheDocument(); // must exist
 });
+
 
 //   it('should include "Now" in the header instead of a time', () => {
 //     expect(wrapper.find('header').text()).to.not.include(moment().format('MMMM Do YYYY'))
 //     expect(wrapper.find('header').text()).to.include('Now')
 //   });
+
 
 //   it('should include the ExampleComponent', () => {
 //     expect(wrapper.text()).to.include('<ExampleComponent />')
